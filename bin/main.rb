@@ -1,8 +1,7 @@
+# !/usr/bin/env ruby
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Metrics/MethodLength
-
-# !/usr/bin/env ruby
 
 require_relative '../lib/board.rb'
 require_relative '../lib/players.rb'
