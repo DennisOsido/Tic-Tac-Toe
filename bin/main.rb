@@ -1,4 +1,8 @@
-#!/usr/bin/env ruby
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/MethodLength
+
+# !/usr/bin/env ruby
 
 require_relative '../lib/board.rb'
 require_relative '../lib/players.rb'
@@ -62,3 +66,7 @@ def play
   end
 end
 play
+
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Metrics/MethodLength
