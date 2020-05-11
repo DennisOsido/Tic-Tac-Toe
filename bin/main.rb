@@ -1,7 +1,4 @@
-# !/usr/bin/env ruby
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Metrics/MethodLength
+#!/usr/bin/env ruby
 
 require_relative '../lib/board.rb'
 require_relative '../lib/players.rb'
@@ -13,46 +10,49 @@ require_relative '../lib/logic.rb'
 
 def take_turn(player, cell)
   @board.board[cell] = player
+  @board.board[cell] = player
 end
 
 def play
-  @board.display_board
-  puts 'Player1 write your name'
-  temp_player_name = gets.chomp
-  player1 = Player.new(temp_player_name)
-  puts "player1's name is #{player1.name}"
-  puts ''
-  puts 'Player2 write your name'
-  temp_player_name = gets.chomp
-  player2 = Player.new(temp_player_name)
-  puts "Player2's name is #{player2.name}"
-
   while @winner == ''
     @board.display_board
-    if @turn == 'X'
-      puts "#{player1.name} select your cell"
-    else
-      puts "#{player2.name} select your cell"
-    end
-    cell = gets.chomp
+    puts 'Player1 write your name'
+    temp_player_name = gets.chomp
+    player1 = Player.new(temp_player_name)
+    puts "player1's name is #{player1.name}"
+    puts ''
+    puts 'Player2 write your name'
+    temp_player_name = gets.chomp
+    player2 = Player.new(temp_player_name)
+    puts "Player2's name is #{player2.name}"
 
-    while @board.board[cell.to_i] != ' '
-      puts 'Please only select an empty cell between 0 and 8'
-      puts 'Select another cell'
+    while @winner == ''
+      @board.display_board
+      if @turn == 'X'
+        puts "#{player1.name} select your cell"
+      else
+        puts "#{player2.name} select your cell"
+      end
       cell = gets.chomp
-    end
 
-    take_turn(@turn, cell.to_i)
+      while @board.board[cell.to_i] != ' '
+        puts 'Please only select an empty cell between 0 and 8'
+        puts 'Select another cell'
+        cell = gets.chomp
+     end
 
-    @winner = @turn if check_win(@board.board) == true
+      take_turn(@turn, cell.to_i)
 
-    @winner = 'T' if @winner == '' && !@board.board.include?(' ')
+      @winner = @turn if check_win(@board.board) == true
 
-    @turn = if @turn == 'X'
-              'O'
-            else
-              'X'
-            end
+      @winner = 'T' if @winner == '' && !@board.board.include?(' ')
+
+      @turn = if @turn == 'X'
+                'O'
+              else
+                'X'
+              end
+  end
   end
 
   @board.display_board
@@ -65,7 +65,3 @@ def play
   end
 end
 play
-
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Metrics/MethodLength
