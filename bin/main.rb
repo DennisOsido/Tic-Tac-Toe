@@ -30,7 +30,7 @@ def take_turn(board, player, cell)
 end
 
 def play(board, players)
-  winner = true
+  winner = false
   until winner
     display_board(board)
     puts "#{players[0]} select your cell between 0 to 8"
