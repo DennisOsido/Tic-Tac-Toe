@@ -29,29 +29,7 @@ def take_turn(board, player, cell)
   end
 end
 
-def play(board, players)
-  winner = false
-  until winner
-    display_board(board)
-    puts "#{players[0]} select your cell between 0 to 8"
-    cell = gets.chomp
-    take_turn(board, players[0], cell.to_i)
-    display_board(board)
-    puts "#{players[1]} select your cell between 0 to 8"
-    cell = gets.chomp
-
-    while board[cell.to_i] != ' '
-      puts 'Please only select an empty cell between 0 and 8'
-      puts 'Select another cell'
-      cell = gets.chomp
-    end
-
-    take_turn(board, players[1], cell.to_i)
-  end
-end
-play(board, players)
-
-def check_win(board, player)
+def check_win(board, player, players, winner)
   puts "#{players[0]} is the winner" if logic(board) == true && player == players[0]
 
   puts "#{players[1]} is the winner" if logic(board) == true && player == players[1]
@@ -60,7 +38,6 @@ def check_win(board, player)
 end
 
 def logic(board)
-  check_win(board, players)
   if board[0] == board[1] && board[0] == board[2] && board[0] != ' ' && board[1] != ' ' && board[2] != ' '
     true
   elsif board[3] == board[4] && board[3] == board[5] && board[3] != ' ' && board[4] != ' ' && board[5] != ' '
@@ -81,4 +58,37 @@ def logic(board)
     false
   end
 end
+
+def play(board, players)
+  winner = false
+  until winner
+    display_board(board)
+    puts "#{players[0]} select your cell between 0 to 8"
+    cell = gets.chomp
+
+    while board[cell.to_i] != ' '
+      puts 'Please only select an empty cell between 0 and 8'
+      puts 'Select another cell'
+      cell = gets.chomp
+    end
+    take_turn(board, players[0], cell.to_i)
+    break if logic(board) == true
+
+    display_board(board)
+    puts "#{players[1]} select your cell between 0 to 8"
+    cell = gets.chomp
+
+    while board[cell.to_i] != ' '
+      puts 'Please only select an empty cell between 0 and 8'
+      puts 'Select another cell'
+      cell = gets.chomp
+    end
+    take_turn(board, players[1], cell.to_i)
+    break if logic(board) == true
+  end
+  check_win(board, players[0], players, winner)
+  check_win(board, players[1], players, winner)
+end
+play(board, players)
+
 #logic(board)
