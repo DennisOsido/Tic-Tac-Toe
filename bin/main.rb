@@ -38,11 +38,14 @@ def check_win(board,player, players, winner)
     puts "#{players[1]} is the winner"
   end
 
-  if !winner && !board.include?(' ')
+  if !won(board) && full?(board)
     puts "It's a Draw"
   end
 end
 
+def full?(board)
+  board.all? {|i| i == "X" || i == "O"}
+end
 
 def won(board)
   if board[0] == board[1] && board[0] == board[2] && board[0] != ' ' && board[1] != ' ' && board[2] != ' '
@@ -79,7 +82,8 @@ def play(board, players)
     end
     take_turn(board, players[0], cell.to_i)
     display_board(board)
-    break if won(board) == true
+    check_win(board, players[0], players, winner)
+    break if won(board) == true || full?(board)
     
     puts "#{players[1]} select your cell between 0 to 8"
     cell = gets.chomp
@@ -91,10 +95,8 @@ def play(board, players)
     end
     take_turn(board, players[1], cell.to_i)
     display_board(board)
-    break if won(board) == true
-    
+    check_win(board, players[1], players, winner)
+    break if won(board) == true || full?(board)
   end
-  check_win(board, players[0], players, winner)
-  #check_win(board, players[1], players, winner)
 end
 play(board, players)
