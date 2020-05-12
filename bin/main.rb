@@ -29,15 +29,22 @@ def take_turn(board, player, cell)
   end
 end
 
-def check_win(board, player, players, winner)
-  puts "#{players[0]} is the winner" if logic(board) == true && player == players[0]
+def check_win(board,player, players, winner)
+  if player == players[0] && won(board) == true  
+    puts "#{players[0]} is the winner"
+  end 
 
-  puts "#{players[1]} is the winner" if logic(board) == true && player == players[1]
+  if player == players[1] && won(board) == true
+    puts "#{players[1]} is the winner"
+  end
 
-  puts "It's a Draw" if !winner && !board.include?(' ')
+  if !winner && !board.include?(' ')
+    puts "It's a Draw"
+  end
 end
 
-def logic(board)
+
+def won(board)
   if board[0] == board[1] && board[0] == board[2] && board[0] != ' ' && board[1] != ' ' && board[2] != ' '
     true
   elsif board[3] == board[4] && board[3] == board[5] && board[3] != ' ' && board[4] != ' ' && board[5] != ' '
@@ -72,8 +79,8 @@ def play(board, players)
       cell = gets.chomp
     end
     take_turn(board, players[0], cell.to_i)
-    break if logic(board) == true
-
+    break if won(board) == true
+    
     display_board(board)
     puts "#{players[1]} select your cell between 0 to 8"
     cell = gets.chomp
@@ -84,11 +91,10 @@ def play(board, players)
       cell = gets.chomp
     end
     take_turn(board, players[1], cell.to_i)
-    break if logic(board) == true
+    break if won(board) == true
+    
   end
   check_win(board, players[0], players, winner)
-  check_win(board, players[1], players, winner)
+  #check_win(board, players[1], players, winner)
 end
 play(board, players)
-
-#logic(board)
