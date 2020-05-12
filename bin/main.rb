@@ -69,7 +69,6 @@ end
 def play(board, players)
   winner = false
   until winner
-    display_board(board)
     puts "#{players[0]} select your cell between 0 to 8"
     cell = gets.chomp
 
@@ -79,9 +78,9 @@ def play(board, players)
       cell = gets.chomp
     end
     take_turn(board, players[0], cell.to_i)
+    display_board(board)
     break if won(board) == true
     
-    display_board(board)
     puts "#{players[1]} select your cell between 0 to 8"
     cell = gets.chomp
 
@@ -91,6 +90,7 @@ def play(board, players)
       cell = gets.chomp
     end
     take_turn(board, players[1], cell.to_i)
+    display_board(board)
     break if won(board) == true
     
   end
