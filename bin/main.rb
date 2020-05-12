@@ -1,4 +1,9 @@
 #!/usr/bin/env ruby
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Style/MultipleComparison
 
 board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
@@ -20,13 +25,8 @@ def display_board(board)
 end
 
 def take_turn(board, player, cell)
-  if player == 'player1'
-    piece = 'X'
-    board[cell] = piece
-  else
-    piece = 'O'
-    board[cell] = piece
-  end
+  board[cell] = 'X' if player == 'player1'
+  board[cell] = 'O' if player == 'player2'
 end
 
 def check_win(board, player, players, _winner)
@@ -94,3 +94,9 @@ def play(board, players)
   end
 end
 play(board, players)
+
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/MethodLength:
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Style/MultipleComparison
