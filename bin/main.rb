@@ -4,64 +4,46 @@ require_relative '../lib/board.rb'
 require_relative '../lib/players.rb'
 require_relative '../lib/logic.rb'
 
-@board = Board.new
-@winner = ''
-@turn = 'X'
+def check_win(board, player, players, _winner)
+  puts "#{players[0]} is the winner" if player == players[0] && won(board) == true
 
-def take_turn(player, cell)
-  @board.board[cell] = player
-  @board.board[cell] = player
+  puts "#{players[1]} is the winner" if player == players[1] && won(board) == true
+
+  puts "It's a Draw" if !won(board) && full?(board)
 end
 
-def play
-  while @winner == ''
-    @board.display_board
-    puts 'Player1 write your name'
-    temp_player_name = gets.chomp
-    player1 = Player.new(temp_player_name)
-    puts "player1's name is #{player1.name}"
-    puts ''
-    puts 'Player2 write your name'
-    temp_player_name = gets.chomp
-    player2 = Player.new(temp_player_name)
-    puts "Player2's name is #{player2.name}"
+def full?(board)
+  board.all? { |i| i == 'X' || i == 'O' }
+end
 
-    while @winner == ''
-      @board.display_board
-      if @turn == 'X'
-        puts "#{player1.name} select your cell"
-      else
-        puts "#{player2.name} select your cell"
-      end
+def play(board, players)
+  winner = false
+  until winner
+    puts "#{players[0]} select your cell between 0 to 8"
+    cell = gets.chomp
+
+    while board[cell.to_i] != ' '
+      puts 'Please only select an empty cell between 0 and 8'
+      puts 'Select another cell'
       cell = gets.chomp
+    end
+    take_turn(board, players[0], cell.to_i)
+    display_board(board)
+    check_win(board, players[0], players, winner)
+    break if won(board) == true || full?(board)
 
-      while @board.board[cell.to_i] != ' '
-        puts 'Please only select an empty cell between 0 and 8'
-        puts 'Select another cell'
-        cell = gets.chomp
-     end
+    puts "#{players[1]} select your cell between 0 to 8"
+    cell = gets.chomp
 
-      take_turn(@turn, cell.to_i)
-
-      @winner = @turn if check_win(@board.board) == true
-
-      @winner = 'T' if @winner == '' && !@board.board.include?(' ')
-
-      @turn = if @turn == 'X'
-                'O'
-              else
-                'X'
-              end
-  end
-  end
-
-  @board.display_board
-  if @winner == 'X'
-    puts "#{player1.name} is the winner"
-  elsif @winner == 'O'
-    puts "#{player2.name} is the winner"
-  elsif @winner == 'T'
-    puts "It's a tie"
+    while board[cell.to_i] != ' '
+      puts 'Please only select an empty cell between 0 and 8'
+      puts 'Select another cell'
+      cell = gets.chomp
+    end
+    take_turn(board, players[1], cell.to_i)
+    display_board(board)
+    check_win(board, players[1], players, winner)
+    break if won(board) == true || full?(board)
   end
 end
-play
+play(board, players)
