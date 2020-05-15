@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/board.rb'
 require_relative '../lib/game.rb'
 
+board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 players = %w[player1 player2]
-board_obj = Board.new
-game = Game.new(board_obj, players)
+
+game = Game.new(board)
 
 def display_board(board)
   puts "#{board[0]}  |#{board[1]}  |#{board[2]} "
@@ -14,6 +14,11 @@ def display_board(board)
   puts '_ _|_ _|_ _'
   puts "#{board[6]}  |#{board[7]}  |#{board[8]} "
   puts '   |   |   '
+end
+
+def take_turn(board, player, cell)
+  board[cell] = 'X' if player == 'player1'
+  board[cell] = 'O' if player == 'player2'
 end
 
 def check_win(game, player, players)
