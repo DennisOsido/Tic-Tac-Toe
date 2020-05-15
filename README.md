@@ -10,10 +10,12 @@ It is a game of Tic-Tac-Toe
 - The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.
 
 - 8 Possible Winning Combinations (if player plays X):
-  
+
+```  
 X O O   O X O   O O X   X X X   O O O   O O O   X O O   O O X
 X O O   O X O   O O X   O O O   X X X   O O O   O X O   O X O
 X O O   O X O   O O X   O O O   O O O   X X X   O O X   X O O
+```
 
 ## Built With
 - Ruby 2.6.5
