@@ -73,6 +73,4 @@ Feel free to check the [issues page](https://github.com/DennisOsido/Tic-Tac-Toe/
 
 Give a ⭐️ if you like this project!
 
-## 📝 Copyright
-
 ### Enjoy!
