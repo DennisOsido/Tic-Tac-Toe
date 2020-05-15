@@ -1,11 +1,13 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/game.rb'
+require_relative '../lib/check_win.rb'
 
 board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 players = %w[player1 player2]
 
 game = Game.new(board)
+win = Win.new(board)
 
 def display_board(board)
   puts "#{board[0]}  |#{board[1]}  |#{board[2]} "
@@ -21,15 +23,15 @@ def take_turn(board, player, cell)
   board[cell] = 'O' if player == 'player2'
 end
 
-def check_win(game, player, players)
-  puts "#{players[0]} is the winner" if player == players[0] && game.won? == true
+def check_win(game, win, player, players)
+  puts "#{players[0]} is the winner" if player == players[0] && win.won? == true
 
-  puts "#{players[1]} is the winner" if player == players[1] && game.won? == true
+  puts "#{players[1]} is the winner" if player == players[1] && win.won? == true
 
-  puts "It's a Draw" if !game.won? && game.full?
+  puts "It's a Draw" if !win.won? && game.full?
 end
 
-def play(game, board, players)
+def play(game, win, board, players)
   loop do
     puts "#{players[0]} select your cell between 0 to 8"
     cell = gets.chomp
@@ -41,8 +43,8 @@ def play(game, board, players)
     end
     take_turn(game.board, players[0], cell.to_i)
     display_board(game.board)
-    check_win(game, players[0], players)
-    break if game.won? == true || game.full?
+    check_win(game, win, players[0], players)
+    break if win.won? == true || game.full?
 
     puts "#{players[1]} select your cell between 0 to 8"
     cell = gets.chomp
@@ -54,8 +56,8 @@ def play(game, board, players)
     end
     take_turn(game.board, players[1], cell.to_i)
     display_board(game.board)
-    check_win(game, players[1], players)
-    break if game.won? == true || game.full?
+    check_win(game, win, players[1], players)
+    break if win.won? == true || game.full?
   end
 end
-play(game, game.board, players)
+play(game, win, game.board, players)
