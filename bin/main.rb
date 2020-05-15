@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/MethodLength
 
 require_relative '../lib/game.rb'
 require_relative '../lib/check_win.rb'
@@ -31,7 +33,7 @@ def check_win(game, win, player, players)
   puts "It's a Draw" if !win.won? && game.full?
 end
 
-def play(game, win, board, players)
+def play(game, win, _board, players)
   loop do
     puts "#{players[0]} select your cell between 0 to 8"
     cell = gets.chomp
@@ -61,3 +63,6 @@ def play(game, win, board, players)
   end
 end
 play(game, win, game.board, players)
+
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/MethodLength

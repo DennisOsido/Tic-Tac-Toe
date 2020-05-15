@@ -1,3 +1,5 @@
+# rubocop:disable Style/MultipleComparison
+
 class Game
   attr_accessor :board
   def initialize(board)
@@ -7,5 +9,6 @@ class Game
   def full?
     @board.all? { |i| i == 'X' || i == 'O' }
   end
-
 end
+
+# rubocop:enable Style/MultipleComparison
