@@ -1,49 +1,69 @@
 require_relative '../lib/game.rb'
 require_relative '../lib/check_win.rb'
 
-describe Win do
+RSpec.describe Win do
+    let(:board) {[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']}
+    let(:win){Win.new(board)}
+
+    let(:win1_x) {['X', 'X', 'X', 'X', 'O', 'O', 'O', 'X', 'O']}
+    let(:win1_x_combo) {Win.new(win1_x)}
+
+    let(:win2_x) {['X', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'O']}
+    let(:win2_x_combo) {Win.new(win2_x)}
+
+    let(:win3_x) {['X', 'O', 'O', 'O', 'O', 'X', 'X', 'X', 'X']}
+    let(:win3_x_combo) {Win.new(win3_x)}
+
+    let(:win4_x) {['X', 'X', 'O', 'X', 'O', 'X', 'X', 'O', 'O']}
+    let(:win4_x_combo) {Win.new(win4_x)}
+
+    let(:win5_x) {['X', 'X', 'O', 'O', 'X', 'X', 'O', 'X', 'O']}
+    let(:win5_x_combo) {Win.new(win5_x)}
+
+    let(:win6_x) {['O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'X']}
+    let(:win6_x_combo) {Win.new(win6_x)}
+
+    let(:win7_x) {['O', 'X', 'X', 'X', 'X', 'O', 'X', 'O', 'O']}
+    let(:win7_x_combo) {Win.new(win7_x)}
+
+    let(:win8_x) {['X', 'X', 'O', 'X', 'X', 'O', 'O', 'O', 'X']}
+    let(:win8_x_combo) {Win.new(win8_x)}
+
     it 'testing initialize method in the Win class' do
-        test_win = Win.new(board)
-        expect(test_win.board).to eql(board)
+        expect(win).to be_an_instance_of(Win)
     end
 
-    it 'testing won method' do
-        test_win = Win.new(board)
-        expect(test_win.won?).to be_truthy(board[0] == board[1] && board[0] == board[2] && board[0] != ' ' && board[1] != ' ' && board[2] != ' ')
-    end
+    describe '.won?' do
+        it 'testing row 1 winning combination when player X has won' do
+            expect(win1_x_combo.won?).to eq(true)
+        end
 
-    it 'testing won method' do
-        test_win = Win.new(board)
-        expect(test_win.won?).to be_truthy(board[3] == board[4] && board[3] == board[5] && board[3] != ' ' && board[4] != ' ' && board[5] != ' ')
-    end
+        it 'testing row 2 winning combination when player X has won' do
+            expect(win2_x_combo.won?).to eq(true)
+        end
 
-    it 'testing won method' do
-        test_win = Win.new(board)
-        expect(test_win.won?).to be_truthy(board[6] == board[7] && board[6] == board[8] && board[6] != ' ' && board[7] != ' ' && board[8] != ' ')
-    end
+        it 'testing row 3 winning combination when player X has won' do
+            expect(win3_x_combo.won?).to eq(true)
+        end
 
-    it 'testing won method' do
-        test_win = Win.new(board)
-        expect(test_win.won?).to be_truthy(board[0] == board[3] && board[0] == board[6] && board[0] != ' ' && board[3] != ' ' && board[6] != ' ')
-    end
+        it 'testing column 1 winning combination when player X has won' do
+            expect(win4_x_combo.won?).to eq(true)
+        end
 
-    it 'testing won method' do
-        test_win = Win.new(board)
-        expect(test_win.won?).to be_truthy(board[1] == board[4] && board[1] == board[7] && board[1] != ' ' && board[4] != ' ' && board[7] != ' ')
-    end
+        it 'testing column 2 winning combination when player X has won' do
+            expect(win5_x_combo.won?).to eq(true)
+        end
 
-    it 'testing won method' do
-        test_win = Win.new(board)
-        expect(test_win.won?).to be_truthy(board[2] == board[5] && board[2] == board[8] && board[2] != ' ' && board[5] != ' ' && board[8] != ' ')
-    end
+        it 'testing column 3 winning combination when player X has won' do
+            expect(win6_x_combo.won?).to eq(true)
+        end
 
-    it 'testing won method' do
-        test_win = Win.new(board)
-        expect(test_win.won?).to be_truthy(board[0] == board[4] && board[0] == board[8] && board[0] != ' ' && board[4] != ' ' && board[8] != ' ')
-    end
+        it 'testing diagonal 1 winning combination when player X has won' do
+            expect(win7_x_combo.won?).to eq(true)
+        end
 
-    it 'testing won method' do
-        test_win = Win.new(board)
-        expect(test_win.won?).to be_truthy(board[2] == board[4] && board[2] == board[6] && board[2] != ' ' && board[4] != ' ' && board[6] != ' ')
+        it 'testing diagonal 2 winning combination when player X has won' do
+            expect(win8_x_combo.won?).to eq(true)
+        end
     end
 end
