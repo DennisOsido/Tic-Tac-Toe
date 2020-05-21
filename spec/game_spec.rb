@@ -7,8 +7,10 @@ RSpec.describe Game do
   let(:board_full) { %w[X X O O O X X O X] }
   let(:gameb) { Game.new(board_full) }
 
-  it 'testing initialize method in the Game class' do
-    expect(game).to be_an_instance_of(Game)
+  describe '.initialize' do
+    it 'testing initialize method in the Game class' do
+      expect(game).to be_an_instance_of(Game)
+    end
   end
 
   describe '.full?' do

@@ -53,73 +53,89 @@ RSpec.describe Win do
   let(:win8_o) { ['O', ' ', ' ', ' ', 'O', ' ', ' ', ' ', 'O'] }
   let(:win8_o_combo) { Win.new(win8_o) }
 
-  it 'testing initialize method in the Win class' do
-    expect(win).to be_an_instance_of(Win)
+  let(:win9_x) { ['X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'] }
+  let(:win9_x_combo) { Win.new(win9_x) }
+
+  let(:win9_o) { ['O', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'O'] }
+  let(:win9_o_combo) { Win.new(win9_o) }
+
+  describe '.initialize' do
+    it 'testing initialize method in the Win class' do
+      expect(win).to be_an_instance_of(Win)
+    end
   end
 
   describe '.won?' do
-    it 'testing row 1 winning combination when player X has won' do
+    it 'should test if player X has won by placing 3 of his symbol in row 1' do
       expect(win1_x_combo.won?).to eq(true)
     end
-
-    it 'testing row 1 winning combination when player O has won' do
+  
+    it 'should test if player O has won by placing 3 of his symbol in row 1' do
       expect(win1_o_combo.won?).to eq(true)
     end
-
-    it 'testing row 2 winning combination when player X has won' do
+  
+    it 'should test if player X has won by placing 3 of his symbol in row 2' do
       expect(win2_x_combo.won?).to eq(true)
     end
-
-    it 'testing row 2 winning combination when player O has won' do
+  
+    it 'should test if player O has won by placing 3 of his symbol in row 2' do
       expect(win2_o_combo.won?).to eq(true)
     end
-
-    it 'testing row 3 winning combination when player X has won' do
+  
+    it 'should test if player X has won by placing 3 of his symbol in row 3' do
       expect(win3_x_combo.won?).to eq(true)
     end
-
-    it 'testing row 3 winning combination when player O has won' do
+  
+    it 'should test if player O has won by placing 3 of his symbol in row 3' do
       expect(win3_o_combo.won?).to eq(true)
     end
-
-    it 'testing column 1 winning combination when player X has won' do
+  
+    it 'should test if player X has won by placing 3 of his symbol in column 1' do
       expect(win4_x_combo.won?).to eq(true)
     end
-
-    it 'testing column 1 winning combination when player O has won' do
+  
+    it 'should test if player O has won by placing 3 of his symbol in column 1' do
       expect(win4_o_combo.won?).to eq(true)
     end
-
-    it 'testing column 2 winning combination when player X has won' do
+  
+    it 'should test if player X has won by placing 3 of his symbol in column 2' do
       expect(win5_x_combo.won?).to eq(true)
     end
-
-    it 'testing column 2 winning combination when player O has won' do
+  
+    it 'should test if player O has won by placing 3 of his symbol in column 2' do
       expect(win5_o_combo.won?).to eq(true)
     end
-
-    it 'testing column 3 winning combination when player X has won' do
+  
+    it 'should test if player X has won by placing 3 of his symbol in column 3' do
       expect(win6_x_combo.won?).to eq(true)
     end
-
-    it 'testing column 3 winning combination when player O has won' do
+  
+    it 'should test if player O has won by placing 3 of his symbol in column 3' do
       expect(win6_o_combo.won?).to eq(true)
     end
-
-    it 'testing diagonal 1 winning combination when player X has won' do
+  
+    it 'should test if player X has won by placing 3 of his symbol in diagonal 1' do
       expect(win7_x_combo.won?).to eq(true)
     end
-
-    it 'testing diagonal 1 winning combination when player O has won' do
+  
+    it 'should test if player O has won by placing 3 of his symbol in diagonal 1' do
       expect(win7_o_combo.won?).to eq(true)
     end
-
-    it 'testing diagonal 2 winning combination when player X has won' do
+  
+    it 'should test if player X has won by placing 3 of his symbol in diagonal 2' do
       expect(win8_x_combo.won?).to eq(true)
     end
-
-    it 'testing diagonal 2 winning combination when player O has won' do
+  
+    it 'should test if player O has won by placing 3 of his symbol in diagonal 2' do
       expect(win8_o_combo.won?).to eq(true)
+    end
+  
+    it 'should test if player X has won by placing 3 of his symbol in diagonal 2, otherwise player x is not a winner' do
+      expect(win9_x_combo.won?).to_not eq(true)
+    end
+  
+    it 'should test if player O has won by placing 3 of his symbol in diagonal 2, otherwise player O is not a winner' do
+      expect(win9_o_combo.won?).to_not eq(true)
     end
   end
 end
