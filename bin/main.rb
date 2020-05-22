@@ -11,6 +11,7 @@ players = %w[player1 player2]
 game = Game.new(board)
 win = Win.new(board)
 
+=begin
 def display_board(board)
   puts "#{board[0]}  |#{board[1]}  |#{board[2]} "
   puts '_ _|_ _|_ _'
@@ -18,6 +19,17 @@ def display_board(board)
   puts '_ _|_ _|_ _'
   puts "#{board[6]}  |#{board[7]}  |#{board[8]} "
   puts '   |   |   '
+end
+=end
+
+def display_board(board)
+  board = "  #{board[0]}  |#{board[1]}  |#{board[2]}
+  _ _|_ _|_ _
+  #{board[3]}  |#{board[4]}  |#{board[5]}
+  _ _|_ _|_ _
+  #{board[6]}  |#{board[7]}  |#{board[8]}
+     |   |   "
+  board
 end
 
 def take_turn(board, player, cell)
@@ -44,7 +56,7 @@ def play(game, win, _board, players)
       cell = gets.chomp
     end
     take_turn(game.board, players[0], cell.to_i)
-    display_board(game.board)
+    puts display_board(game.board)
     check_win(game, win, players[0], players)
     break if win.won? == true || game.full?
 
@@ -57,7 +69,7 @@ def play(game, win, _board, players)
       cell = gets.chomp
     end
     take_turn(game.board, players[1], cell.to_i)
-    display_board(game.board)
+    puts display_board(game.board)
     check_win(game, win, players[1], players)
     break if win.won? == true || game.full?
   end
