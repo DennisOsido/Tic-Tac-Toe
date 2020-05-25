@@ -7,6 +7,7 @@ require_relative '../lib/check_win.rb'
 require_relative '../lib/board.rb'
 
 board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+
 players = %w[player1 player2]
 
 game = Game.new(board)
